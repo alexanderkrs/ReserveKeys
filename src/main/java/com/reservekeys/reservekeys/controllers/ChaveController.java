@@ -36,5 +36,11 @@ public class ChaveController {
      service.remover(id);
     }
 
+    @PatchMapping (path = "/{id}")
+    public Chave alterar(@RequestBody Chave chave, @PathVariable("id") Long id ){
+        return service.alterar(chave,id);
+
+    }
+
 }
 
