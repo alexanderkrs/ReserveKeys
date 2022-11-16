@@ -1,6 +1,7 @@
 package com.reservekeys.reservekeys.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_chave")
@@ -15,6 +16,9 @@ public class Chave {
     private String local;
 
     private String desc;
+
+    @OneToMany(mappedBy = "chave")
+    private List<Movimentacao> enderecos;
 
     public Long getId() {
         return id;
