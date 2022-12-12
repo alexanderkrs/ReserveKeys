@@ -2,6 +2,7 @@ package com.reservekeys.reservekeys.service;
 
 import com.reservekeys.reservekeys.entities.Chave;
 import com.reservekeys.reservekeys.entities.Movimentacao;
+import com.reservekeys.reservekeys.entities.Status;
 import com.reservekeys.reservekeys.exceptions.service.ServiceException;
 import com.reservekeys.reservekeys.repositories.ChaveRepository;
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +43,8 @@ public class ChaveService {
         if(chave.getLocal().isEmpty()) {
            throw new ServiceException("Campo em Branco!");
         }
-            Chave result = repository.save(chave);
+        chave.setStatus(Status.DISPONIVEL);
+        Chave result = repository.save(chave);
             return result;
     }
 
@@ -65,8 +67,10 @@ public class ChaveService {
         Optional<Chave> chaveOptional = obterChaveSeExiste(id);
         Chave chaveAlterada = chaveOptional.get();
 
-        if(StringUtils.hasLength(chave.getDesc())) {
+        if(StringUtils.hasLength(chave.getDesc()) && StringUtils.hasLength(chave.getLocal())) {
                 chaveAlterada.setDesc(chave.getDesc());
+                chaveAlterada.setLocal(chave.getLocal());
+                chaveAlterada.setNum(chave.getNum());
             }
             chaveAlterada = repository.save(chaveAlterada);
 

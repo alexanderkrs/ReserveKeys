@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/chaves")
 public class ChaveController {
@@ -36,7 +36,7 @@ public class ChaveController {
      service.remover(id);
     }
 
-    @PatchMapping (path = "/{id}")
+    @PutMapping(path = "/{id}")
     public Chave alterar(@RequestBody Chave chave, @PathVariable("id") Long id ){
         return service.alterar(chave,id);
 

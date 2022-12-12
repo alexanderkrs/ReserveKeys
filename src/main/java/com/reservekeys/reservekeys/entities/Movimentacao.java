@@ -1,7 +1,16 @@
 package com.reservekeys.reservekeys.entities;
 
-import javax.persistence.*;
+import lombok.*;
 
+import javax.persistence.*;
+import java.util.List;
+import java.lang.*;
+
+import javax.persistence.*;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_movimentacao")
 public class Movimentacao {
@@ -10,56 +19,31 @@ public class Movimentacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "pessoa_movimentacao")
     private String pessoa;
 
+    @Column(name = "data_emprestimo_movimentacao")
     private String data_emprestimo;
 
+    @Column(name = "data_devolucao_movimentacao")
     private String data_devolucao;
 
     @ManyToOne
     @JoinColumn(name = "id_chave")
     private Chave chave;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(String pessoa) {
+    public Movimentacao(String pessoa, String data_emprestimo, Chave chave) {
         this.pessoa = pessoa;
-    }
-
-    public String getData_emprestimo() {
-        return data_emprestimo;
-    }
-
-    public void setData_emprestimo(String data_emprestimo) {
         this.data_emprestimo = data_emprestimo;
-    }
-
-    public String getData_devolucao() {
-        return data_devolucao;
-    }
-
-    public void setData_devolucao(String data_devolucao) {
-        this.data_devolucao = data_devolucao;
-    }
-
-    public Chave getChave() {
-        return chave;
-    }
-
-    public void setChave(Chave chave) {
         this.chave = chave;
     }
 
-    public Movimentacao () {
+    public Movimentacao(String pessoa, String data_emprestimo, String data_devolucao, Chave chave) {
+        this.pessoa = pessoa;
+        this.data_emprestimo = data_emprestimo;
+        this.data_devolucao = data_devolucao;
+        this.chave = chave;
     }
+
+
 }
